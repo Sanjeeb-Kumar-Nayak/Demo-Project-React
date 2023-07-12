@@ -3,7 +3,7 @@ import axiosInstanceWithoutToken from "../../utilities/axios/axiosConfig";
 // login handler
 export const LoginHelper = async (data) => {
   return await axiosInstanceWithoutToken
-    .post("/users/login", data)
+    .post("/user/loginUser", data)
     .then(function (response) {
       return response.data;
     })
@@ -16,20 +16,7 @@ export const LoginHelper = async (data) => {
 // Signup handler
 export const SignupHelper = async (data) => {
   return await axiosInstanceWithoutToken
-    .post("/users/signup", data)
-    .then(function (response) {
-      return response.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-      return false;
-    });
-};
-
-// forgot password
-export const ForgotPasswordHelper = async (data) => {
-  return await axiosInstanceWithoutToken
-    .post("/users/forgotPassword", data)
+    .post("/user/createUser", data)
     .then(function (response) {
       return response.data;
     })
