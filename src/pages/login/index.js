@@ -4,24 +4,19 @@ import { LoginHelper } from "../../services/user/user";
 import "../login/index.css";
 
 const Login = () => {
-
   const onSubmitFilter = (data) => {
     const jsonData = {
       email: "skn.tilu@gmail.com",
-      password: "tilu1994"
+      password: "tilu1994",
     };
     LoginHelper(JSON.stringify(jsonData))
-    .then((response) => {
-
-    })
-    .catch((error) => {
-
-    });
+      .then((response) => {})
+      .catch((error) => {});
   };
 
   return (
     <>
-      <Form className="loginForm">
+      <Form>
         <Row>
           <Col>
             <Form.Label>User Name</Form.Label>
@@ -32,10 +27,8 @@ const Login = () => {
             <Form.Control type="password"></Form.Control>
           </Col>
         </Row>
-        <Row className="mt-3">
-          <Button
-          onClick={(onSubmitFilter)}
-          >Log In</Button>
+        <Row>
+          <Button onClick={onSubmitFilter}>Log In</Button>
         </Row>
       </Form>
     </>
