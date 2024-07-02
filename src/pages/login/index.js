@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   return (
-    <div className="row" style={{ marginTop: "300px" }}>
+    <div className="row" style={{ marginTop: "200px" }}>
       <div className="col-sm-4"></div>
       <div className="col-sm-4 col-sm-offset-3">
         <h3
