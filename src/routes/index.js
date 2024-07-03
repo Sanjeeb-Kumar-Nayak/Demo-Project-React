@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "../pages/login";
+import Home from "../pages/home";
 
 function Routing() {
   return (
@@ -8,6 +9,7 @@ function Routing() {
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </Router>
     </>
