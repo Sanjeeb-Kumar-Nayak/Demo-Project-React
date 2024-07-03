@@ -2,16 +2,22 @@ import React from "react";
 import { Button, Row, Col, Form, Modal, Accordion } from "react-bootstrap";
 import { LoginHelper } from "../../services/user/user";
 import "../login/index.css";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../redux/reducer";
 
 const Login = () => {
-  const onSubmitFilter = (data) => {
+  const dispatch = useDispatch();
+
+  const onSubmitHandler = (data) => {
     const jsonData = {
-      email: "skn.tilu@gmail.com",
-      password: "tilu1994",
+      email: "sanjeeb.nayak@orsacgeoict.in",
+      password: "Tilu@1994",
     };
     LoginHelper(JSON.stringify(jsonData))
       .then((response) => {})
       .catch((error) => {});
+
+    dispatch(loginUser(jsonData));
   };
 
   // Submit button styles
@@ -61,7 +67,7 @@ const Login = () => {
             </div>
           </Row>
           <Row className="mt-3 justify-content-center">
-            <Button style={submitButtonStyle} onClick={onSubmitFilter}>
+            <Button style={submitButtonStyle} onClick={onSubmitHandler}>
               Log In
             </Button>
           </Row>
