@@ -1,18 +1,26 @@
 import React from "react";
-import "../login/index.css";
+import "../forgotpassword/index.css";
 import { Button, Row, Col, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/reducer";
-import { LoginHelper } from "../../services/user/user";
+import { SendOtpHelper } from "../../services/user/user";
 
-const Login = () => {
+const SendOtp = () => {
   const submitButtonStyle = {
-    width: "5rem",
+    width: "7rem",
     backgroundColor: "#4aaf51",
     color: "white",
     borderColor: "#4aaf51",
+  };
+
+  const cancelButtonStyle = {
+    width: "7rem",
+    backgroundColor: "white",
+    color: "#4aaf51",
+    borderColor: "#4aaf51",
+    marginLeft: "10px",
   };
 
   const {
@@ -29,18 +37,23 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onSubmitLogin = (data) => {
-    LoginHelper(JSON.stringify(data))
+  const onClickSendOtp = (data) => {
+    console.log(data);
+    SendOtpHelper(JSON.stringify(data))
       .then((response) => {
         if (response && response.status == 1) {
           dispatch(loginUser(data));
           reset();
-          navigate("/home");
+          navigate("/verifyotp");
         }
       })
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const onClickCancel = () => {
+    navigate("/");
   };
 
   return (
@@ -74,59 +87,21 @@ const Login = () => {
               )}
             </div>
           </Row>
-          <Row className="mt-1">
-            <div className="d-flex flex-column">
-              <Form.Control
-                size="sm"
-                name="password"
-                type="password"
-                placeholder="Enter your password"
-                {...register("password", {
-                  required: "Password Required!",
-                })}
-              ></Form.Control>
-              {errors.password && (
-                <span className="text-danger">{errors.password.message}</span>
-              )}
-            </div>
-          </Row>
-          <div style={{ textAlign: "right", marginTop: "10px" }}>
-            <Link
-              to={"/sendotp"}
-              style={{
-                textDecoration: "none",
-              }}
-            >
-              Forgot Password?
-            </Link>
-          </div>
           <Row className="mt-3 justify-content-center">
             <Button
               style={submitButtonStyle}
-              onClick={handleSubmit(onSubmitLogin)}
+              onClick={handleSubmit(onClickSendOtp)}
             >
-              Log In
+              Send OTP
+            </Button>
+            <Button style={cancelButtonStyle} onClick={onClickCancel}>
+              Cancel
             </Button>
           </Row>
-          <div
-            style={{ color: "white", textAlign: "center", marginTop: "10px" }}
-          >
-            Don't have account?
-            <Link
-              to={"/signup"}
-              style={{
-                color: "orange",
-                marginLeft: "5px",
-                textDecoration: "none",
-              }}
-            >
-              Sign Up
-            </Link>
-          </div>
         </Form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default SendOtp;

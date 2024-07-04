@@ -1,7 +1,7 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
-  login: [{ id: 1, email: "Hello", password: "1234" }],
+  login: [],
 };
 
 export const loginReducer = createSlice({

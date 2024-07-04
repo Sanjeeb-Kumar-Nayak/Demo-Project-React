@@ -13,6 +13,14 @@ const Signup = () => {
     borderColor: "#4aaf51",
   };
 
+  const cancelButtonStyle = {
+    width: "6rem",
+    backgroundColor: "white",
+    color: "#4aaf51",
+    borderColor: "#4aaf51",
+    marginLeft: "10px",
+  };
+
   const {
     register,
     handleSubmit,
@@ -40,10 +48,14 @@ const Signup = () => {
       });
   };
 
+  const onClickCancel = () => {
+    navigate("/");
+  };
+
   return (
     <div className="row" style={{ marginTop: "150px" }}>
       <div className="col-sm-4"></div>
-      <div className="col-sm-4 col-sm-offset-3">
+      <div className="col-sm-3 col-sm-offset-3">
         <h3
           style={{
             textAlign: "center",
@@ -127,6 +139,9 @@ const Signup = () => {
               onClick={handleSubmit(onSubmitSignup)}
             >
               Sign Up
+            </Button>
+            <Button style={cancelButtonStyle} onClick={onClickCancel}>
+              Cancel
             </Button>
           </Row>
         </Form>
