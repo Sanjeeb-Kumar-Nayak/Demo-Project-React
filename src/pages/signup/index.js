@@ -1,15 +1,13 @@
 import React from "react";
-import "../login/index.css";
+import "../signup/index.css";
 import { Button, Row, Col, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../redux/reducer";
-import { LoginHelper } from "../../services/user/user";
+import { useNavigate } from "react-router-dom";
+import { SignupHelper } from "../../services/user/user";
 
-const Login = () => {
+const Signup = () => {
   const submitButtonStyle = {
-    width: "5rem",
+    width: "6rem",
     backgroundColor: "#4aaf51",
     color: "white",
     borderColor: "#4aaf51",
@@ -27,15 +25,14 @@ const Login = () => {
   } = useForm({});
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const onSubmitLogin = (data) => {
-    LoginHelper(JSON.stringify(data))
+  const onSubmitSignup = (data) => {
+    console.log(data);
+    SignupHelper(JSON.stringify(data))
       .then((response) => {
         if (response && response.status == 1) {
-          dispatch(loginUser(data));
           reset();
-          navigate("/home");
+          navigate("/");
         }
       })
       .catch((error) => {
@@ -44,7 +41,7 @@ const Login = () => {
   };
 
   return (
-    <div className="row" style={{ marginTop: "200px" }}>
+    <div className="row" style={{ marginTop: "150px" }}>
       <div className="col-sm-4"></div>
       <div className="col-sm-4 col-sm-offset-3">
         <h3
@@ -56,8 +53,42 @@ const Login = () => {
         >
           SKN PRIVATE
         </h3>
-        <Form className="loginForm">
+        <Form className="signupForm">
           <Row>
+            <div className="d-flex flex-column">
+              <Form.Control
+                className="newSize"
+                size="sm"
+                name="name"
+                type="text"
+                placeholder="Enter your name"
+                {...register("name", {
+                  required: "Name Required!",
+                })}
+              ></Form.Control>
+              {errors.name && (
+                <span className="text-danger">{errors.name.message}</span>
+              )}
+            </div>
+          </Row>
+          <Row className="mt-1">
+            <div className="d-flex flex-column">
+              <Form.Control
+                className="newSize"
+                size="sm"
+                name="mobile"
+                type="number"
+                placeholder="Enter your mobile"
+                {...register("mobile", {
+                  required: "Mobile Required!",
+                })}
+              ></Form.Control>
+              {errors.mobile && (
+                <span className="text-danger">{errors.mobile.message}</span>
+              )}
+            </div>
+          </Row>
+          <Row className="mt-1">
             <div className="d-flex flex-column">
               <Form.Control
                 className="newSize"
@@ -93,31 +124,15 @@ const Login = () => {
           <Row className="mt-3 justify-content-center">
             <Button
               style={submitButtonStyle}
-              onClick={handleSubmit(onSubmitLogin)}
-            >
-              Log In
-            </Button>
-          </Row>
-          <div
-            style={{ color: "white", textAlign: "center", marginTop: "10px" }}
-          >
-            Don't have account?
-            <Link
-              to={"/signup"}
-              style={{
-                color: "orange",
-                marginLeft: "5px",
-                cursor: "pointer",
-                textDecoration: "none",
-              }}
+              onClick={handleSubmit(onSubmitSignup)}
             >
               Sign Up
-            </Link>
-          </div>
+            </Button>
+          </Row>
         </Form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
