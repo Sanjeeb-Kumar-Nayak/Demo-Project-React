@@ -6,7 +6,8 @@ import Signup from "../pages/signup";
 import SendOtp from "../pages/forgotpassword/sendotp";
 import VerifyOtp from "../pages/forgotpassword/verifyotp";
 import ResetPassword from "../pages/forgotpassword/resetpassword";
-import Header from "../components/header";
+import { Header } from "../components/header";
+import { Topbar } from "../components/topbar";
 
 function Routing() {
   return (
@@ -20,6 +21,7 @@ function Routing() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
           <Route path="/header" element={<Header />} />
+          <Route path="/topbar" element={<Topbar />} />
         </Routes>
       </Router>
     </>
