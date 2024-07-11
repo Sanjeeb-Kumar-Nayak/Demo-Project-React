@@ -1,5 +1,5 @@
 import React from "react";
-import "../login/index.css";
+import "./index.css";
 import { Button, Row, Col, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
